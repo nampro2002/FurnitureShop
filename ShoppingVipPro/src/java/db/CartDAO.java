@@ -29,11 +29,15 @@ public class CartDAO extends DBContext {
         statement.execute(sql);
     }
 
-    public void updateCart(int AccountId, int productId, int Amount) throws SQLException {
-        String sql = "update cart set Amount=" + Amount
-                + "where AccountID=" + AccountId + "and ProductID=" + productId;
-        Statement statement = connection.createStatement();
-        statement.execute(sql);
+    public void updateCart(int AccountId, int productId, int Amount)  {
+        try {
+            String sql = "update cart set Amount=" + Amount
+                    + "where AccountID=" + AccountId + "and ProductID=" + productId;
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void delete() throws SQLException {

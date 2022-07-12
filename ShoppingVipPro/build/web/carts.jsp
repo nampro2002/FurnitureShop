@@ -79,6 +79,7 @@
                                 <form action ="update-cart-quantity" method="post" class="submit">
                                     <tr>
                                     <input type="hidden" name="productId" value="${ct.value.product.id}">
+                                    <input type="hidden" name="accountId" value="${sessionScope.account.getId()}">
                                     <td>
                                         <div class="media">
                                             <div class="d-flex">
@@ -93,7 +94,7 @@
                                         <h5>$${ct.value.product.price}</h5>
                                     </td>
                                     <td>    
-                                        <input onchange="this.form.submit()" type="number" class="num" value="${ct.value.quantity}" name="quantity">
+                                        <input onchange="this.form.submit()" type="number" class="num" value="${ct.value.quantity}" name="quantity" style="max-width: 70px;">
                                         <!--                                            <div class="wrapper">
                                                                                         <span class="minus">-</span>
                                                                                         <input type="number" class="num" value="" name="quantity">

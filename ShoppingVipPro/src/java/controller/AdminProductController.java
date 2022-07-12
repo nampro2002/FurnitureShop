@@ -36,6 +36,11 @@ public class AdminProductController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             final int PAGE_SIZE = 9;
             int page = 1;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            } else {
+                page = 1;
+            }
             String pageStr = request.getParameter("page");
             if (pageStr != null) {
                 page = Integer.parseInt(pageStr);

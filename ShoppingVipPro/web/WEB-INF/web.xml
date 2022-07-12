@@ -100,6 +100,10 @@
         <servlet-name>AdminDeleteUserController</servlet-name>
         <servlet-class>controller.AdminDeleteUserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminEditInfoProductController</servlet-name>
+        <servlet-class>controller.AdminEditInfoProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -207,6 +211,10 @@
     <servlet-mapping>
         <servlet-name>AdminDeleteUserController</servlet-name>
         <url-pattern>/admin-delete-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEditInfoProductController</servlet-name>
+        <url-pattern>/admin-edit-info</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

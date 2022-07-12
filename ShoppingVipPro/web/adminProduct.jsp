@@ -347,11 +347,14 @@
                                     <td id="quantityData">${lp.getQuantity()}</td>
                                     <td id="cateIdData">${lp.getCategoryId()}</td>                                    
                                     <td>
-                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                        <a href="admin-edit-info?productId=${lp.getId()}&page=${page}" class="edit" ><i class="material-icons" title="Edit">&#xE254;</i></a>
                                         <a href="admin-delete-prod?productId=${lp.getId()}&page=${sessionScope.page}" class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a>
                                     </td>
-                                </tr>    
-                            </c:forEach>
+                                </tr>                                
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <div class="clearfix">
@@ -454,16 +457,7 @@
                 </div>
             </div>
         </div>
-        <script>
-            document.getElementById('page').value = document.getElementById('pageNow').innerHTML;
-            document.getElementById('idprod').value = document.getElementById('idData').innerHTML;
-            document.getElementById('imgDataEdit').value = document.getElementById('imgData').src;
-            document.getElementById('nameDataEdit').value = document.getElementById('nameData').innerHTML;
-            document.getElementById('priceDataEdit').value = document.getElementById('priceData').innerHTML;
-            document.getElementById('descDataEdit').value = document.getElementById('descData').innerHTML;
-            document.getElementById('quantityDataEdit').value = document.getElementById('quantityData').innerHTML;
-            document.getElementById('cateIdDataEdit').value = document.getElementById('cateIdData').innerHTML;
-        </script>
+
         <!--         Delete Modal HTML 
                 <div id="deleteEmployeeModal" class="modal fade">
                     <div class="modal-dialog">

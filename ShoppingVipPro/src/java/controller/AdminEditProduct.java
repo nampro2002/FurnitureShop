@@ -86,7 +86,8 @@ public class AdminEditProduct extends HttpServlet {
         Product product = new Product(nameprod, imgsrc, priceprod, descprod, quantityprod, cateidprod);
         d.adminEditProduct(product, idprod);
         request.setAttribute("mess", "update succ");
-        request.getRequestDispatcher("admin-product?page="+page).forward(request, response);
+        request.setAttribute("page", page);
+        request.getRequestDispatcher("admin-edit-info?productId="+idprod).forward(request, response);
     }
 
     /**
