@@ -161,15 +161,13 @@ public class ProductDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
 //                Product product = new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getString(5), rs.getInt(6), rs.getInt(7));
-                Product product = Product.builder()
-                        .id(rs.getInt(1))
-                        .name(rs.getString(2))
-                        .image(rs.getString(3))
-                        .price(rs.getDouble(4))
-                        .description(rs.getString(5))
-                        .quantity(rs.getInt(6))
-                        .categoryId(rs.getInt(7))
-                        .build();
+                Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -189,15 +187,13 @@ public class ProductDAO extends DBContext {
             st.setInt(3, PAGE_SIZE);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Product product = Product.builder()
-                        .id(rs.getInt(1))
-                        .name(rs.getString(2))
-                        .image(rs.getString(3))
-                        .price(rs.getDouble(4))
-                        .description(rs.getString(5))
-                        .quantity(rs.getInt(6))
-                        .categoryId(rs.getInt(7))
-                        .build();
+                Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -221,15 +217,13 @@ public class ProductDAO extends DBContext {
             st.setInt(3, PAGE_SIZE);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Product product = Product.builder()
-                        .id(rs.getInt(1))
-                        .name(rs.getString(2))
-                        .image(rs.getString(3))
-                        .price(rs.getDouble(4))
-                        .description(rs.getString(5))
-                        .quantity(rs.getInt(6))
-                        .categoryId(rs.getInt(7))
-                        .build();
+                Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -260,15 +254,13 @@ public class ProductDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Product product = Product.builder()
-                        .id(rs.getInt(1))
-                        .name(rs.getString(2))
-                        .image(rs.getString(3))
-                        .price(rs.getDouble(4))
-                        .description(rs.getString(5))
-                        .quantity(rs.getInt(6))
-                        .categoryId(rs.getInt(7))
-                        .build();
+                Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -293,15 +285,13 @@ public class ProductDAO extends DBContext {
             st.setInt(1, categoryId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Product product = Product.builder()
-                        .id(rs.getInt(1))
-                        .name(rs.getString(2))
-                        .image(rs.getString(3))
-                        .price(rs.getDouble(4))
-                        .description(rs.getString(5))
-                        .quantity(rs.getInt(6))
-                        .categoryId(rs.getInt(7))
-                        .build();
+                Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -317,20 +307,84 @@ public class ProductDAO extends DBContext {
             st.setInt(1, productId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Product product = Product.builder()
-                        .id(rs.getInt(1))
-                        .name(rs.getString(2))
-                        .image(rs.getString(3))
-                        .price(rs.getDouble(4))
-                        .description(rs.getString(5))
-                        .quantity(rs.getInt(6))
-                        .categoryId(rs.getInt(7))
-                        .build();
+                Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7));
                 return product;
             }
         } catch (Exception ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void adminEditProduct(Product product, int idprod) {
+        String sql = "UPDATE [dbo].[product]\n"
+                + "   SET \n"
+                + "      [name] = ?\n"
+                + "      ,[image] = ?\n"
+                + "      ,[price] = ?\n"
+                + "      ,[description] = ?\n"
+                + "      ,[quantity] = ?\n"
+                + "      ,[cateID] = ?\n"
+                + " WHERE [product].id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, product.getName());
+            st.setString(2, product.getImage());
+            st.setDouble(3, product.getPrice());
+            st.setString(4, product.getDescription());
+            st.setInt(5, product.getQuantity());
+            st.setInt(6, product.getCategoryId());
+            st.setInt(7, idprod);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void adminDeleteProduct(int productId) {
+        String sql = "DELETE FROM [dbo].[product]\n"
+                + "      WHERE [product].id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, productId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void adminAddNewProduct(Product product) {
+        String sql = "INSERT INTO [dbo].[product]\n"
+                + "           ([name]\n"
+                + "           ,[image]\n"
+                + "           ,[price]\n"
+                + "           ,[description]\n"
+                + "           ,[quantity]\n"
+                + "           ,[cateID])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, product.getName());
+            st.setString(2, product.getImage());
+            st.setDouble(3, product.getPrice());
+            st.setString(4, product.getDescription());
+            st.setInt(5, product.getQuantity());
+            st.setInt(6, product.getCategoryId());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }

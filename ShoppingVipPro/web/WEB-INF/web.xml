@@ -84,6 +84,14 @@
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>controller.SearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminEditProduct</servlet-name>
+        <servlet-class>controller.AdminEditProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteProdController</servlet-name>
+        <servlet-class>controller.AdminDeleteProdController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -175,6 +183,14 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEditProduct</servlet-name>
+        <url-pattern>/admin-edit-product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteProdController</servlet-name>
+        <url-pattern>/admin-delete-prod</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

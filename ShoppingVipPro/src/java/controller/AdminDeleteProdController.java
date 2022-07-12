@@ -11,14 +11,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Product;
 
 /**
  *
  * @author Admin
  */
-public class AdminProductController extends HttpServlet {
+public class AdminDeleteProdController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,23 +32,12 @@ public class AdminProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            final int PAGE_SIZE = 9;
-            int page = 1;
-            String pageStr = request.getParameter("page");
-            if (pageStr != null) {
-                page = Integer.parseInt(pageStr);
-            }
-            int totalProduct = new ProductDAO().getTotalProduct();
-            int totalPage = totalProduct / PAGE_SIZE;
-            if (totalProduct % PAGE_SIZE != 0) {
-                totalPage += 1;
-            }
-            ArrayList<Product> listprod = new ProductDAO().getProductWithPagging(page, PAGE_SIZE);
-            request.setAttribute("listProd", listprod);
-            request.setAttribute("totalPage", totalPage);
-            request.setAttribute("page", page);
-            request.getSession().setAttribute("page", page);
-            request.getRequestDispatcher("adminProduct.jsp").forward(request, response);
+            int productId = Integer.parseInt(request.getParameter("productId"));
+            int page = Integer.parseInt(request.getParameter("page"));
+            ProductDAO d = new ProductDAO();
+            d.adminDeleteProduct(productId);
+            request.setAttribute("mess", "delete succ");
+            request.getRequestDispatcher("admin-product?page="+page).forward(request, response);
         }
     }
 

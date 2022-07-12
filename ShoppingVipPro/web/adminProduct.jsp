@@ -165,6 +165,9 @@
             .pagination li.active a:hover {
                 background: #0397d6;
             }
+            .active{
+                background: #03A9F4;
+            }
             .pagination li.disabled i {
                 color: #ccc;
             }
@@ -336,30 +339,27 @@
                                             <label for="checkbox1"></label>
                                         </span>
                                     </td>                                
-                                    <td><img src="${lp.getImage()}" alt="alt" style="max-width: 130px;"/></td>
-                                    <td>${lp.getName()}</td>
-                                    <td>${lp.getPrice()}</td>
-                                    <td>${lp.getDescription()}</td>
-                                    <td>${lp.getQuantity()}</td>
-                                    <td>${lp.getCategoryId()}</td>                                    
+                                    <td ><img id="imgData" src="${lp.getImage()}" alt="alt" style="max-width: 130px;"/></td>
+                                    <td id="idData" style="display:none;">${lp.getId()}</td>
+                                    <td id="nameData">${lp.getName()}</td>
+                                    <td id="priceData">${lp.getPrice()}</td>
+                                    <td id="descData">${lp.getDescription()}</td>
+                                    <td id="quantityData">${lp.getQuantity()}</td>
+                                    <td id="cateIdData">${lp.getCategoryId()}</td>                                    
                                     <td>
                                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                        <a href="admin-delete-prod?productId=${lp.getId()}&page=${sessionScope.page}" class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a>
                                     </td>
                                 </tr>    
                             </c:forEach>
                         </tbody>
                     </table>
                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a href="#">Previous</a></li>
-                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        <ul class="pagination">                            
+                            <c:forEach begin ="1" end="${totalPage}" var = "i">
+                                <li class="page-item "><a id ="pageNow" class="page-link ${i==page?"active":""}" href="admin-product?page=${i}">${i}</a></li> 
+                                <li class="page-item">                       
+                                </c:forEach>
                         </ul>
                     </div>
                 </div>
@@ -369,35 +369,35 @@
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="admin-edit-product" method="get">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                       <div class="modal-body">					
+                        <div class="modal-body">					
                             <div class="form-group">
                                 <label>Image</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" class="form-control" required name="imgsrc">
                             </div>
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" class="form-control" required name="nameprod">
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
-                                <input type="email" class="form-control" required>
+                                <input type="number" class="form-control" required name="priceprod">
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" required></textarea>
+                                <textarea class="form-control" required name="descprod"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Quantity</label>
-                                <input type="text" class="form-control" required>
+                                <input type="number" class="form-control" required name="quantityprod">
                             </div>					
                             <div class="form-group">
                                 <label>CategoryId</label>
-                                <input type="text" class="form-control" required>
+                                <input type="number" class="form-control" required name="cateidprod">
                             </div>					
                         </div>
                         <div class="modal-footer">
@@ -409,38 +409,41 @@
             </div>
         </div>
         <!-- Edit Modal HTML -->
+
         <div id="editEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="admin-edit-product" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Edit Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                        <div class="modal-body">					
+                        <div class="modal-body">
+                            <input id="page" type="number" class="form-control" name="page" required hidden>
+                            <input id="idprod" type="number" class="form-control" name="idprod" required hidden>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input type="text" class="form-control" required>
+                                <input id="imgDataEdit" type="text" class="form-control" name="imgsrc" required>
                             </div>
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" required>
+                                <input id="nameDataEdit" type="text" class="form-control" name="nameprod" required>
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
-                                <input type="email" class="form-control" required>
+                                <input id="priceDataEdit" type="number" class="form-control" name="priceprod" required>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" required></textarea>
+                                <textarea id="descDataEdit" class="form-control" required name="descprod"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Quantity</label>
-                                <input type="text" class="form-control" required>
+                                <input id="quantityDataEdit" type="number" class="form-control" name="quantityprod" required>
                             </div>					
                             <div class="form-group">
                                 <label>CategoryId</label>
-                                <input type="text" class="form-control" required>
+                                <input id="cateIdDataEdit" type="number" class="form-control" name="cateidprod" required>
                             </div>					
                         </div>
                         <div class="modal-footer">
@@ -451,6 +454,16 @@
                 </div>
             </div>
         </div>
+        <script>
+            document.getElementById('page').value = document.getElementById('pageNow').innerHTML;
+            document.getElementById('idprod').value = document.getElementById('idData').innerHTML;
+            document.getElementById('imgDataEdit').value = document.getElementById('imgData').src;
+            document.getElementById('nameDataEdit').value = document.getElementById('nameData').innerHTML;
+            document.getElementById('priceDataEdit').value = document.getElementById('priceData').innerHTML;
+            document.getElementById('descDataEdit').value = document.getElementById('descData').innerHTML;
+            document.getElementById('quantityDataEdit').value = document.getElementById('quantityData').innerHTML;
+            document.getElementById('cateIdDataEdit').value = document.getElementById('cateIdData').innerHTML;
+        </script>
         <!--         Delete Modal HTML 
                 <div id="deleteEmployeeModal" class="modal fade">
                     <div class="modal-dialog">

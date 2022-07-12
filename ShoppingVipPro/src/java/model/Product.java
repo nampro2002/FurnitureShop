@@ -5,17 +5,10 @@
  */
 package model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 /**
  *
  * @author Admin
  */
-@Builder
-@ToString
 public class Product {
 
     private int id;
@@ -25,6 +18,28 @@ public class Product {
     private String description;
     private int quantity;
     private int categoryId;
+
+    public Product(int id, String name, String image, double price, String description, int quantity, int categoryId) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.quantity = quantity;
+        this.categoryId = categoryId;
+    }
+
+    public Product(String name, String image, double price, String description, int quantity, int categoryId) {
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.quantity = quantity;
+        this.categoryId = categoryId;
+    }
+
+    public Product() {
+    }
 
     public int getId() {
         return id;
@@ -81,7 +96,5 @@ public class Product {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
-
-   
 
 }

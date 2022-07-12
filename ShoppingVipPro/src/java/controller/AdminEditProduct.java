@@ -11,14 +11,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import model.Product;
 
 /**
  *
  * @author Admin
  */
-public class AdminProductController extends HttpServlet {
+public class AdminEditProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,23 +33,7 @@ public class AdminProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            final int PAGE_SIZE = 9;
-            int page = 1;
-            String pageStr = request.getParameter("page");
-            if (pageStr != null) {
-                page = Integer.parseInt(pageStr);
-            }
-            int totalProduct = new ProductDAO().getTotalProduct();
-            int totalPage = totalProduct / PAGE_SIZE;
-            if (totalProduct % PAGE_SIZE != 0) {
-                totalPage += 1;
-            }
-            ArrayList<Product> listprod = new ProductDAO().getProductWithPagging(page, PAGE_SIZE);
-            request.setAttribute("listProd", listprod);
-            request.setAttribute("totalPage", totalPage);
-            request.setAttribute("page", page);
-            request.getSession().setAttribute("page", page);
-            request.getRequestDispatcher("adminProduct.jsp").forward(request, response);
+
         }
     }
 
@@ -65,8 +48,19 @@ public class AdminProductController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {       
+        String imgsrc = request.getParameter("imgsrc");
+        String nameprod = request.getParameter("nameprod");
+        double priceprod = Double.parseDouble(request.getParameter("priceprod"));
+        String descprod = request.getParameter("descprod");
+        int quantityprod = Integer.parseInt(request.getParameter("quantityprod"));
+        int cateidprod = Integer.parseInt(request.getParameter("cateidprod"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        ProductDAO d = new ProductDAO();
+        Product product = new Product(nameprod, imgsrc, priceprod, descprod, quantityprod, cateidprod);
+        d.adminAddNewProduct(product);
+        request.setAttribute("mess", "add succ");
+        request.getRequestDispatcher("admin-product?page="+page).forward(request, response);
     }
 
     /**
@@ -80,7 +74,19 @@ public class AdminProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int page = Integer.parseInt(request.getParameter("page"));
+        int idprod = Integer.parseInt(request.getParameter("idprod"));
+        String imgsrc = request.getParameter("imgsrc");
+        String nameprod = request.getParameter("nameprod");
+        double priceprod = Double.parseDouble(request.getParameter("priceprod"));
+        String descprod = request.getParameter("descprod");
+        int quantityprod = Integer.parseInt(request.getParameter("quantityprod"));
+        int cateidprod = Integer.parseInt(request.getParameter("cateidprod"));
+        ProductDAO d = new ProductDAO();
+        Product product = new Product(nameprod, imgsrc, priceprod, descprod, quantityprod, cateidprod);
+        d.adminEditProduct(product, idprod);
+        request.setAttribute("mess", "update succ");
+        request.getRequestDispatcher("admin-product?page="+page).forward(request, response);
     }
 
     /**

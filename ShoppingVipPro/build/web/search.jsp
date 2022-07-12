@@ -41,33 +41,38 @@
         <br>
         <br>
 
-        <%
-                        if (request.getAttribute("notice") == null) {
-        %>
-        <h2>All Products</h2>
-        <%
-        } else {
-        %>
-        <h2>${notice}</h2>
-        <%
-            }
-        %>
 
-        <div class="row align-items-center justify-content-between">
-            <c:forEach items="${cart}" var="o">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_product_item">
-                        <img src="${o.image}" style="width:300px;height:250px;" alt="">
-                        <div class="single_product_text">
-                            <h4>${o.name}</h4>
-                            <h3>$${o.price}</h3>
-                            <a href="add-to-cart?productId=${o.id}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+        <div class="container">
+            <div style="margin: 30px 0;">
+                <%
+                            if (request.getAttribute("notice") == null) {
+                %>
+                <h2>All Products</h2>
+                <%
+                } else {
+                %>
+                <h2>${notice}</h2>
+                <%
+                    }
+                %>
+            </div>
+            <div class="col-lg-12">
+                <div class="row align-items-center justify-content-between">
+                    <c:forEach items="${cart}" var="o">
+                        <div class="col-lg-3 col-sm-12" style="margin:5px">
+                            <div class="single_product_item">
+                                <img src="${o.image}" style="width:300px;height:250px;" alt="">
+                                <div class="single_product_text">
+                                    <h4>${o.name}</h4>
+                                    <h3>$${o.price}</h3>
+                                    <a href="add-to-cart?productId=${o.id}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </c:forEach>
                 </div>
-            </c:forEach>
+            </div>
         </div>
-
         <footer class="footer_part">
             <div class="container">
                 <div class="row justify-content-around">
