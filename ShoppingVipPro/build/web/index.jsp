@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>aranoz</title>
         <link rel="icon" href="img/favicon.png">
-        <!-- Bootstrap CSS -->
+        <!-- Bootstrap CSS --> 
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <!-- animate CSS -->
         <link rel="stylesheet" href="css/animate.css">
@@ -154,7 +154,7 @@
                                                 <div class="single_product_text">
                                                     <h4>${p.name}</h4>
                                                     <h3>$${p.price}</h3>
-                                                    <a href="add-to-cart?productId=${p.id}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                                    <a href="add-to-cart?productId=${p.id}&accountId=${sessionScope.account.getId()}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@
                                                 <div class="single_product_text">
                                                     <h4>${p.name}</h4>
                                                     <h3>$${p.price}</h3>
-                                                    <a href="add-to-cart?productId=${p.id}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                                    <a href="add-to-cart?productId=${p.id}&accountId=${sessionScope.account.getId()}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                                 </div>
                                             </div>
                                         </div>

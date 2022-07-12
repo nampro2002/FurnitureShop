@@ -5,13 +5,23 @@
 package controller;
 
 import db.AccountDAO;
+import db.CartDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import model.Account;
+import model.Cart;
+import db.CartEntity;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +39,7 @@ public class LoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -39,19 +49,26 @@ public class LoginController extends HttpServlet {
             Account account = new AccountDAO().login(username, password);
             System.out.println(username);
             System.out.println(password);
-            System.out.println(account);
+            System.out.println(account.getId());
+            HttpSession session = request.getSession();
+
             if (account != null) {
-                request.getSession().setAttribute("account", account);
+                int accountId = account.getId();
+                CartDAO cd = new CartDAO();
+                ArrayList<CartEntity> list = cd.getCartEntityById(accountId);
+                Map<Integer, Cart> carts = cd.getCartByCartEntity(list);
+                session.setAttribute("account", account);
+                session.setAttribute("carts", carts);
                 if (loginId == 1) {
                     response.sendRedirect("home");
-                } else{
+                } else {
                     response.sendRedirect("checkout.jsp");
                 }
             } else {
                 request.setAttribute("mess", "wrong username or password");
                 if (loginId == 1) {
                     request.getRequestDispatcher("login.jsp").forward(request, response);
-                } else{
+                } else {
                     request.getRequestDispatcher("checkout.jsp").forward(request, response);
                 }
 
@@ -71,7 +88,11 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -85,7 +106,11 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

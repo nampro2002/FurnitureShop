@@ -96,7 +96,7 @@
                                     <input class="input-number" type="text" value="1" min="0" max="10">
                                     <span class="number-increment"> <i class="ti-plus"></i></span>
                                 </div>
-                                <a href="add-to-cart?productId=${product.id}" class="btn_3">add to cart</a>
+                                <a href="add-to-cart?productId=${product.id}&accountId=${sessionScope.account.getId()}" class="btn_3">add to cart</a>
                                 <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
                             </div>
                         </div>

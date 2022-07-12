@@ -92,6 +92,14 @@
         <servlet-name>AdminDeleteProdController</servlet-name>
         <servlet-class>controller.AdminDeleteProdController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateCartQuantityController</servlet-name>
+        <servlet-class>controller.UpdateCartQuantityController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteUserController</servlet-name>
+        <servlet-class>controller.AdminDeleteUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -191,6 +199,14 @@
     <servlet-mapping>
         <servlet-name>AdminDeleteProdController</servlet-name>
         <url-pattern>/admin-delete-prod</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCartQuantityController</servlet-name>
+        <url-pattern>/update-cart-quantity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteUserController</servlet-name>
+        <url-pattern>/admin-delete-user</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

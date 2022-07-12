@@ -344,7 +344,7 @@
                                 <td>${ls.getPhone()}</td>
                                 <td>${ls.isGender()}</td>
                                 <td>                                    
-                                    <a href="#" class="delete" ><i class="material-icons" title="Delete">&#xE872;</i></a>
+                                     <a href="admin-delete-user?userId=${ls.getId()}" class="delete" ><i class="material-icons" title="Delete">&#xE872;</i></a>
                                 </td>
                             </tr>
                             </c:forEach>

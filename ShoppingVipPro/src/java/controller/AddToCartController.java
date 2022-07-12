@@ -4,6 +4,8 @@
  */
 package controller;
 
+import db.CartDAO;
+import db.CartEntity;
 import db.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +14,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Cart;
 import model.Product;
 
@@ -33,9 +39,10 @@ public class AddToCartController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            CartDAO cd = new CartDAO();
             /* TODO output your page here. You may use following sample code. */
             int accountId = Integer.parseInt(request.getParameter("accountId"));
             int productId = Integer.parseInt(request.getParameter("productId"));
@@ -47,14 +54,17 @@ public class AddToCartController extends HttpServlet {
             if (carts.containsKey(productId)) {
                 int oldQuantity = carts.get(productId).getQuantity();
                 carts.get(productId).setQuantity(oldQuantity + 1);
+                cd.updateCart(accountId, productId, carts.get(productId).getQuantity());
             } else {
                 Product product = new ProductDAO().getProductById(productId);
+                Cart cart = new Cart(accountId, product, 1);
+                cd.AddToCart(accountId, productId, 1);
                 carts.put(productId, new Cart(product, 1));
             }
+//            ArrayList<CartEntity> list = cd.getCartById(accountId);
+            
             session.setAttribute("carts", carts);
-            System.out.println(carts); 
-            out.print(accountId);
-//            response.sendRedirect((String) session.getAttribute("urlHistory"));
+            response.sendRedirect((String) session.getAttribute("urlHistory"));
         }
     }
 
@@ -70,7 +80,11 @@ public class AddToCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddToCartController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -84,7 +98,11 @@ public class AddToCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddToCartController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

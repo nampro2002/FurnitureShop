@@ -31,6 +31,7 @@ public class LogoutController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
            request.getSession().removeAttribute("account");
+           request.getSession().removeAttribute("carts");
            response.sendRedirect("home");
         }
     } 

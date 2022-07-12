@@ -104,4 +104,9 @@ public class AccountDAO extends DBContext {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public static void main(String[] args) {
+        Account account =new AccountDAO().login("Adam","1234");
+        System.out.println(account
+        );
+    }
 }
