@@ -45,36 +45,40 @@
                         <div class="banner_slider owl-carousel ">
                             <div class="single_banner_slider" style="padding:20px;">
                                 <div class="row">
-                                    <div class="col-lg-5 col-md-8">
-                                        <div class="banner_text">
-                                            <div class="banner_text_iner">
-                                                <h1>Wood & Cloth Sofa
-                                                </h1>
-                                                <p>Incididunt ut labore et dolore magna aliqua quis ipsum suspendisse ultrices gravida. Risus commodo viverra</p>
-                                                <a href="#" class="btn_2">buy now</a>
+                                    <c:forEach items="${data}" var="p">
+                                        <div class="col-lg-5 col-md-8">
+                                            <div class="banner_text">
+                                                <div class="banner_text_iner">
+                                                    <h1>${p.name}
+                                                    </h1>
+                                                    <p>Incididunt ut labore et dolore magna aliqua quis ipsum suspendisse ultrices gravida. Risus commodo viverra</p>
+                                                    <a href="add-to-cart?productId=${p.id}&accountId=${sessionScope.account.getId()}" class="btn_2">Add to cart</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="banner_img d-none d-lg-block">
-                                        <img src="img/banner_img.png" alt="">
-                                    </div>
+                                        <div class="banner_img d-none d-lg-block">
+                                            <img src="${p.image}" alt="">
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                             <div class="single_banner_slider" style="padding:20px;">
                                 <div class="row">
-                                    <div class="col-lg-5 col-md-8">
-                                        <div class="banner_text">
-                                            <div class="banner_text_iner">
-                                                <h1>Cloth & Wood Sofa
-                                                </h1>
-                                                <p>Incididunt ut labore et dolore magna aliqua quis ipsum suspendisse ultrices gravida. Risus commodo viverra</p>
-                                                <a href="#" class="btn_2">buy now</a>
+                                    <c:forEach items="${data1}" var="p">
+                                        <div class="col-lg-5 col-md-8">
+                                            <div class="banner_text">
+                                                <div class="banner_text_iner">
+                                                    <h1>${p.name}
+                                                    </h1>
+                                                    <p>Incididunt ut labore et dolore magna aliqua quis ipsum suspendisse ultrices gravida. Risus commodo viverra</p>
+                                                    <a href="add-to-cart?productId=${p.id}&accountId=${sessionScope.account.getId()}" class="btn_2">Add to cart</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="banner_img d-none d-lg-block">
-                                        <img src="img/banner_img.png" alt="">
-                                    </div>
+                                        <div class="banner_img d-none d-lg-block">
+                                            <img src="${p.image}" alt="">
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -230,41 +234,15 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-lg-12">
                         <div class="best_product_slider owl-carousel">
-                            <div class="single_product_item">
-                                <img src="img/product/product_1.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
+                            <c:forEach items="${listprod4}" var="p">
+                                <div class="single_product_item">
+                                    <img src="${p.image}" alt="">
+                                    <div class="single_product_text">
+                                        <h4${p.name}</h4>
+                                            <h3>$${p.price}</h3>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="single_product_item">
-                                <img src="img/product/product_2.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                </div>
-                            </div>
-                            <div class="single_product_item">
-                                <img src="img/product/product_3.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                </div>
-                            </div>
-                            <div class="single_product_item">
-                                <img src="img/product/product_4.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                </div>
-                            </div>
-                            <div class="single_product_item">
-                                <img src="img/product/product_5.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
