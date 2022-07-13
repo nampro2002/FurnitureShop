@@ -28,7 +28,7 @@ public class UserDAO extends DBContext {
             st.setInt(1, accountId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                return new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getBoolean(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9));
+                return new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getBoolean(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
             }
         } catch (Exception ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,7 +178,7 @@ public class UserDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getBoolean(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9));
+                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getBoolean(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
                 list.add(user);
             }
         } catch (Exception ex) {

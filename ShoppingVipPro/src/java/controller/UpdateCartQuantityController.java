@@ -46,8 +46,8 @@ public class UpdateCartQuantityController extends HttpServlet {
                 carts = new LinkedHashMap<>();
             }
             if (carts.containsKey(productId)) {
+                cd.updateCart(accountId, productId, quantity);
                 carts.get(productId).setQuantity(quantity);
-                cd.updateCart(accountId, productId, carts.get(productId).getQuantity());
             }
             session.setAttribute("carts", carts);
             response.sendRedirect("cart");

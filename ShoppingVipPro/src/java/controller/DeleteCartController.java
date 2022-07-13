@@ -5,6 +5,7 @@
 
 package controller;
 
+import db.CartDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -34,13 +35,16 @@ public class DeleteCartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            CartDAO d= new CartDAO();
            int productId = Integer.parseInt(request.getParameter("productId"));
+           int accountId = Integer.parseInt(request.getParameter("accountId"));
            HttpSession session = request.getSession();
            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
             if(carts ==null){
                 carts = new LinkedHashMap<>();
             }
             if(carts.containsKey(productId)){
+                d.deleteFromCart(accountId, productId);
                 carts.remove(productId);
             }
             session.setAttribute("carts", carts);

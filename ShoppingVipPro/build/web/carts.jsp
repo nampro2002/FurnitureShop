@@ -105,7 +105,7 @@
                                         <h5>$${ct.value.product.price*ct.value.quantity}</h5>
                                     </td>
                                     <td>
-                                        <a href="delete-cart?productId=${ct.value.product.id}" class="genric-btn danger radius">Delete</a>
+                                        <a href="delete-cart?productId=${ct.value.product.id}&accountId=${sessionScope.account.getId()}" class="genric-btn danger radius">Delete</a>
                                     </td>
                                     </tr>
                                 </form>

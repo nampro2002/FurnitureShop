@@ -18,14 +18,14 @@ public class User {
     private Date birthday;
     private boolean gender;
     private String email;
-    private int phone;
+    private String phone;
     private String address;
     private int accountID;
 
     public User() {
     }
 
-    public User(int id, String fristName, String lastName, Date birthday, boolean gender, String email, int phone, String address, int accountID) {
+    public User(int id, String fristName, String lastName, Date birthday, boolean gender, String email, String phone, String address, int accountID) {
         this.id = id;
         this.fristName = fristName;
         this.lastName = lastName;
@@ -86,11 +86,11 @@ public class User {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

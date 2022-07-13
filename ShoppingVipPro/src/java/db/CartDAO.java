@@ -33,17 +33,25 @@ public class CartDAO extends DBContext {
         try {
             String sql = "update cart set Amount=" + Amount
                     + "where AccountID=" + AccountId + "and ProductID=" + productId;
-            Statement statement = connection.createStatement();
-            statement.execute(sql);
+           PreparedStatement st = connection.prepareStatement(sql);
+            st.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void delete() throws SQLException {
-        String sql = "delete from Cart";
-        Statement statement = connection.createStatement();
-        statement.execute(sql);
+
+    public void deleteFromCart(int AccountId, int productId) {
+        try {
+            String sql = "DELETE FROM [dbo].[Cart]\n" +
+                    "      WHERE AccountID= ? and  ProductID= ?  ";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, AccountId);
+            st.setInt(2, productId);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public ArrayList<CartEntity> getCartEntityById(int id) {
