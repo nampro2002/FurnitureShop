@@ -114,7 +114,7 @@
                     </c:when>
                     <c:otherwise>
                         <div class="log-sgin">
-                            <a href="login.jsp" class="genric-btn info">Login</a>
+                            <a href="login" class="genric-btn info">Login</a>
                             <a href="register.jsp" class="genric-btn success">Sign-Up</a>
                         </div>
                     </c:otherwise>

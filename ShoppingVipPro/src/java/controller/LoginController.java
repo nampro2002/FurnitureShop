@@ -19,6 +19,7 @@ import java.util.Map;
 import model.Account;
 import model.Cart;
 import db.CartEntity;
+import jakarta.servlet.http.Cookie;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,36 +44,7 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int loginId = Integer.parseInt(request.getParameter("logId"));
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            Account account = new AccountDAO().login(username, password);
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(account.getId());
-            HttpSession session = request.getSession();
 
-            if (account != null) {
-                int accountId = account.getId();
-                CartDAO cd = new CartDAO();
-                ArrayList<CartEntity> list = cd.getCartEntityById(accountId);
-                Map<Integer, Cart> carts = cd.getCartByCartEntity(list);
-                session.setAttribute("account", account);
-                session.setAttribute("carts", carts);
-                if (loginId == 1) {
-                    response.sendRedirect("home");
-                } else {
-                    response.sendRedirect("checkout.jsp");
-                }
-            } else {
-                request.setAttribute("mess", "wrong username or password");
-                if (loginId == 1) {
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
-                } else {
-                    request.getRequestDispatcher("checkout.jsp").forward(request, response);
-                }
-
-            }
         }
     }
 
@@ -88,11 +60,31 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        Cookie[] cookies = request.getCookies();
+        String username = null;
+        String password = null;
+        boolean remember = true;
+        if (cookies != null) {
+            for (Cookie cooky : cookies) {
+                if (cooky.getName().equals("username")) {
+                    username = cooky.getValue();
+                }
+                if (cooky.getName().equals("password")) {
+                    password = cooky.getValue();
+                }
+                if (username != null && password != null) {
+                    break;
+                }
+            }
+            if (username != null && password != null) {
+                request.setAttribute("username", username);
+                request.setAttribute("password", password);
+                request.getSession().setAttribute("remember", remember);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
         }
+        response.sendRedirect("login.jsp");
     }
 
     /**
@@ -106,10 +98,46 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        boolean remember = request.getParameter("selector") != null;
+        Account account = new AccountDAO().login(username, password);
+        HttpSession session = request.getSession();
+
+        if (account != null) {
+            if (remember) {
+                Cookie usernameCookie = new Cookie("username", username);
+                usernameCookie.setMaxAge(60 * 60 * 24 * 2);
+                Cookie passwordCookie = new Cookie("password", password);
+                passwordCookie.setMaxAge(60 * 60 * 24);
+                response.addCookie(usernameCookie);
+                response.addCookie(passwordCookie);
+                session.setAttribute("remember", remember);
+            } else {
+                Cookie[] cookies = request.getCookies();
+                for (Cookie cooky : cookies) {
+                    if (cooky.getName().equals("username")) {
+                        cooky.setMaxAge(0);
+                        response.addCookie(cooky);
+                    }
+                    if (cooky.getName().equals("password")) {
+                        cooky.setMaxAge(0);
+                        response.addCookie(cooky);
+                    }
+                }
+                session.removeAttribute("remember");
+            }
+            int accountId = account.getId();
+            CartDAO cd = new CartDAO();
+            ArrayList<CartEntity> list = cd.getCartEntityById(accountId);
+            Map<Integer, Cart> carts = cd.getCartByCartEntity(list);
+            session.setAttribute("account", account);
+            session.setAttribute("carts", carts);
+            response.sendRedirect("home");
+        } else {
+            request.setAttribute("mess", "wrong username or password");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+
         }
     }
 

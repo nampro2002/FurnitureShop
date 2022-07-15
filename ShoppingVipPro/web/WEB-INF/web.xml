@@ -104,6 +104,34 @@
         <servlet-name>AdminEditInfoProductController</servlet-name>
         <servlet-class>controller.AdminEditInfoProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckOutController</servlet-name>
+        <servlet-class>controller.CheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmReceivedController</servlet-name>
+        <servlet-class>controller.ConfirmReceivedController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserOrderController</servlet-name>
+        <servlet-class>controller.UserOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileOrderHistoryController</servlet-name>
+        <servlet-class>controller.ProfileOrderHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderHistoryDelete</servlet-name>
+        <servlet-class>controller.OrderHistoryDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDeleteController</servlet-name>
+        <servlet-class>controller.OrderDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCategoryController</servlet-name>
+        <servlet-class>controller.AdminCategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -215,6 +243,34 @@
     <servlet-mapping>
         <servlet-name>AdminEditInfoProductController</servlet-name>
         <url-pattern>/admin-edit-info</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmReceivedController</servlet-name>
+        <url-pattern>/confirm-received</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserOrderController</servlet-name>
+        <url-pattern>/user-order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileOrderHistoryController</servlet-name>
+        <url-pattern>/profile-order-history</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryDelete</servlet-name>
+        <url-pattern>/odhistory-delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDeleteController</servlet-name>
+        <url-pattern>/order-delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCategoryController</servlet-name>
+        <url-pattern>/admin-category</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -10,7 +10,7 @@
         <div class="row align-items-center">
             <div class="col-lg-10">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
+                    <a class="navbar-brand" href="home"> <img src="img/logo.png" alt="logo"> </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="menu_icon"><i class="fas fa-bars"></i></span>
                     </button>
@@ -21,17 +21,12 @@
                                 <a class="nav-link" href="home">Home</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link" href="product">
                                     Shop
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    <a class="dropdown-item" href="category.html"> shop category</a>
-                                    <a class="dropdown-item" href="single-product.html">product details</a>
-
-                                </div>
+                                </a>                                
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     pages
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
@@ -44,17 +39,13 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     blog
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="blog.html"> blog</a>
-                                    <a class="dropdown-item" href="single-blog.html">Single blog</a>
-                                </div>
+                                </a>                                
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" href="#">Contact</a>
                             </li>
                         </ul>
                     </div>
@@ -73,7 +64,7 @@
                                     </c:otherwise>
                                 </c:choose>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style=" z-index: 2; top:40px">
                                 <div class="dropdown-cart">
                                     <c:choose>
                                         <c:when test="${sessionScope.carts.size()==0||sessionScope.carts==null}">
@@ -89,8 +80,8 @@
                                                              align-items: center;
                                                              margin-bottom: 10px;
                                                              ">
-                                                            <img src="${ct.value.product.image}" alt="" class="cart-css" style="
-                                                                 max-width: 60%;
+                                                            <img src="${ct.value.product.image}" style="width:100px;height:100px;" alt="" class="cart-css" style="
+                                                                 max-width: 40%;
                                                                  margin-right: 10px;
                                                                  ">
                                                             <span>Name:${ct.value.product.name}<br>
@@ -115,7 +106,7 @@
                 <c:choose>
                     <c:when test="${sessionScope.account != null}">
                         <div class="log-sgin">
-                            <a href="profile?accountId=${sessionScope.account.getId()}" class="genric-btn info ">USER</a>
+                            <a href="profile" class="genric-btn info ">USER</a>
                             <a href="logout" class="genric-btn success">Log-out</a>
                         </div>
                     </c:when>
@@ -130,7 +121,7 @@
             </div>
         </div>
     </div>
-    <div class="search_input" id="search_input_box" style ="margin-top: 58px">
+    <div class="search_input" id="search_input_box">
         <div class="container ">
             <form class="d-flex justify-content-between search-inner" action="search">
                 <input type="text" class="form-control" id="search_input" placeholder="Search Here" name="name">
@@ -142,18 +133,21 @@
 
 </header>
 <!--::header part start::-->
-<div class="main_menu home_menu" style="position: fixed; margin-top: 80px">
+<div class="main_menu home_menu" style="position: fixed; margin-top: 80px; z-index: 1" >
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">     
                         <div class="" style="margin: 10px;">
-                            <a href="profile?accountId=${sessionScope.account.getId()}" class="genric-btn info">Profile</a>
-                            <a href="profileOrder.jsp" class="genric-btn info">Order</a>
-                            <a href="profileOrderHistory.jsp" class="genric-btn info">OrderHistory</a>
+                            <a href="profile" class="genric-btn info">Profile</a>
+                            <a href="user-order" class="genric-btn info">Order</a>
+                            <a href="profile-order-history" class="genric-btn info">OrderHistory</a>
+                            <c:if test="${sessionScope.account.getRole()==1}">
                             <a href="user" class="genric-btn info">User</a>
                             <a href="admin-product" class="genric-btn info">Product</a>
+                            <a href="admin-category" class="genric-btn info">Category</a>
+                            </c:if>
                         </div>
                     </div>
                 </nav>

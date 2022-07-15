@@ -38,22 +38,22 @@ public class ProductDAO extends DBContext {
 //        return list;
 //    }
 //
-    public ArrayList<Product> getAll1(String id) throws SQLException {
-        ArrayList<Product> list = new ArrayList<>();
-        String sql = "select * from Product where id=?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, id);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getString("image"),
-                        rs.getDouble("price")));
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
+//    public ArrayList<Product> getAll1(String id) throws SQLException {
+//        ArrayList<Product> list = new ArrayList<>();
+//        String sql = "select * from Product where id=?";
+//        try {
+//            PreparedStatement st = connection.prepareStatement(sql);
+//            st.setString(1, id);
+//            ResultSet rs = st.executeQuery();
+//            while (rs.next()) {
+//                list.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getString("image"),
+//                        rs.getDouble("price")));
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        return list;
+//    }
 //
 //    public ArrayList<Product> getAllTop3() throws SQLException {
 //        ArrayList<Product> list = new ArrayList<>();

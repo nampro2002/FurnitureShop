@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -83,32 +85,17 @@ public class UserDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-        UserDAO d = new UserDAO();
-        System.out.println(d.getAccountId("nampro2k2@gmail.com"));
-    }
-
-    public void addNewUser(String firstname, String lastname, String email, String phone, String username, String password) {
         try {
-            String sql = "INSERT INTO [dbo].[UserInfo]\n"
-                    + "           ([First_Name]\n"
-                    + "           ,[Last_Name]\n"
-                    + "           ,[Email]\n"
-                    + "           ,[PhoneNumber]\n"
-                    + "           ,[Username]\n"
-                    + "           ,[Password])\n"
-                    + "     VALUES\n"
-                    + "           (?,?,?,?,?,?)";
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, firstname);
-            st.setString(2, lastname);
-            st.setString(3, email);
-            st.setString(4, phone);
-            st.setString(5, username);
-            st.setString(6, password);
-            st.executeUpdate();
-        } catch (Exception ex) {
+            Boolean str = true;
+            String sDate1 = "31/12/1998";
+            Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+            User a = new User(1, "fristName", "lastName", date1, true, "nampro2k2", "0123", "ac", 0);
+            System.out.println(str.compareTo(a.isGender()));
+            System.out.println(a.getGender());
+        } catch (ParseException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public String getUsername(int accountId) {
@@ -187,7 +174,7 @@ public class UserDAO extends DBContext {
         return list;
     }
 
-     public int getAccountId(int userId) {
+    public int getAccountId(int userId) {
         String sql = "SELECT [AccountId]\n"
                 + "  FROM [ProjectPRO].[dbo].[UserInfo]\n"
                 + "  where id = ?";
@@ -213,6 +200,32 @@ public class UserDAO extends DBContext {
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+
+    public void addNewUser(User user, String username, String password) {
+        try {
+            String sql = "INSERT INTO [dbo].[UserInfo]\n"
+                    + "           ([First_Name]\n"
+                    + "           ,[Last_Name]\n"
+                    + "           ,[Email]\n"
+                    + "           ,[PhoneNumber]\n"
+                    + "           ,[Username]\n"
+                    + "           ,[Password]\n"
+                    + "           ,[AccountId])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, user.getFristName());
+            st.setString(2, user.getLastName());
+            st.setString(3, user.getEmail());
+            st.setString(4, user.getPhone());
+            st.setString(5, username);
+            st.setString(6, password);
+            st.setInt(7, user.getAccountID());
+            st.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

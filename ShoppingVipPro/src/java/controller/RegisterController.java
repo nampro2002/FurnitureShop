@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
+import model.User;
 
 /**
  *
@@ -34,6 +35,7 @@ public class RegisterController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+
             AccountDAO d = new AccountDAO();
             UserDAO u = new UserDAO();
             String firstname = request.getParameter("firstname");
@@ -47,18 +49,24 @@ public class RegisterController extends HttpServlet {
             if (checkDuplicateEmail) {
                 request.setAttribute("mess", "email da ton tai");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
+                return;
             }
             if (!password.equals(repassword)) {
                 request.setAttribute("mess", "mat khau khong trung nhau");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
+                return;
             } else {
                 Account account = d.checkExist(username);
                 if (account == null) {
-                    d.Register(username, password);
-                    u.addNewUser(firstname, lastname, email, phone, username, password);
-                    response.sendRedirect("home");
+                    Account newAccount = new Account(username, password, 0);
+                    int accountId = d.Register(username, password);
+                    User newUser = new User(firstname, lastname, email, phone, accountId);
+                    u.addNewUser(newUser, username, password);
+                    request.setAttribute("mess", "dang ky thanh cong");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    return;
                 } else {
-                    request.setAttribute("mess", "trung username");
+                    request.setAttribute("mess", "username da ton tai");
                     request.getRequestDispatcher("register.jsp").forward(request, response);
                 }
             }
