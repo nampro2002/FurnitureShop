@@ -45,7 +45,7 @@
                         <div class="login_part_text_iner">
                             <h2>New to our Shop?</h2>
                             <p>There are advances being made in science and technology everyday, and a good example of this is the</p>
-                            <a href="#" class="btn_3">Create an Account</a>
+                            <a href="register.jsp" class="btn_3">Create an Account</a>
                         </div>
                     </div>
                 </div>
@@ -53,19 +53,22 @@
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
                             <h3>Welcome Back ! <br> Please Sign in now</h3>
-                            <div class="alert alert-danger" role="alert">
-                               ${mess}
-                            </div>
-                            <form class="row contact_form" action="login?logId=1" method="post" novalidate="novalidate">
+                            <p class ="text-danger">${mess}</p>
+                            <form class="row contact_form" action="login" method="post" novalidate="novalidate">
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="username" placeholder="Username">
+                                    <input type="text" class="form-control" id="name" name="username" placeholder="Username" value="${username}">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password"  placeholder="Password">
+                                    <input type="password" class="form-control" id="password" name="password"  placeholder="Password"  value="${password}">
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="creat_account d-flex align-items-center">
+                                        <c:if test="${sessionScope.remember != null}">
+                                        <input type="checkbox" id="f-option" name="selector" checked>
+                                        </c:if>
+                                        <c:if test="${sessionScope.remember == null}">
                                         <input type="checkbox" id="f-option" name="selector">
+                                        </c:if>
                                         <label for="f-option">Remember me</label>
                                     </div>
                                     <button type="submit" value="submit" class="btn_3">

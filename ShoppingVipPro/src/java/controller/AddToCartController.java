@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
 import model.Cart;
 import model.Product;
 
@@ -44,22 +45,28 @@ public class AddToCartController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             CartDAO cd = new CartDAO();
             /* TODO output your page here. You may use following sample code. */
-            int accountId = Integer.parseInt(request.getParameter("accountId"));
+            Account account  = (Account) request.getSession().getAttribute("account");
+            int accountId = account.getId();
             int productId = Integer.parseInt(request.getParameter("productId"));
             HttpSession session = request.getSession();
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
             if (carts == null) {
                 carts = new LinkedHashMap<>();
             }
+            System.out.println("tao cart");
             if (carts.containsKey(productId)) {
+                System.out.println("co contain key");
                 int oldQuantity = carts.get(productId).getQuantity();
                 carts.get(productId).setQuantity(oldQuantity + 1);
                 cd.updateCart(accountId, productId, carts.get(productId).getQuantity());
+                 System.out.println("update cart");
             } else {
+                System.out.println("khong contain");
                 Product product = new ProductDAO().getProductById(productId);
                 Cart cart = new Cart(accountId, product, 1);
                 cd.AddToCart(accountId, productId, 1);
                 carts.put(productId, new Cart(product, 1));
+                System.out.println("add to cart");
             }
 //            ArrayList<CartEntity> list = cd.getCartById(accountId);
             

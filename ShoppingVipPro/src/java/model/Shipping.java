@@ -9,19 +9,30 @@ package model;
  * @author Admin
  */
 public class Shipping {
+
     private int id;
     private String name;
     private String phone;
     private String address;
+    private int orderId;
 
     public Shipping() {
     }
 
-    public Shipping(int id, String name, String phone, String address) {
+    public Shipping(int id, String name, String phone, String address, int orderId) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
+        this.orderId = orderId;
+    }
+
+    public Shipping(String name, String phone, String address, int orderId) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.orderId = orderId;
     }
 
     public int getId() {
@@ -56,9 +67,17 @@ public class Shipping {
         this.address = address;
     }
 
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public String toString() {
-        return "Shipping{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + '}';
+        return "Shipping{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", orderId=" + orderId + '}';
     }
-    
+
 }

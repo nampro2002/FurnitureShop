@@ -8,6 +8,7 @@ import context.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -53,7 +54,7 @@ public class AccountDAO extends DBContext {
         return null;
     }
 
-    public void Register(String username, String password) {
+    public int Register(String username, String password) {
 
         try {
             String sql = "INSERT INTO [dbo].[Account]\n"
@@ -64,13 +65,18 @@ public class AccountDAO extends DBContext {
                     + "           (?\n"
                     + "           ,?\n"
                     + "           ,0)";
-            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.setString(1, username);
             st.setString(2, password);
             st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
     }
 
     public int getAccountId(String username, String password) {
@@ -104,8 +110,9 @@ public class AccountDAO extends DBContext {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public static void main(String[] args) {
-        Account account =new AccountDAO().login("Adam","1234");
+        Account account = new AccountDAO().login("Adam", "1234");
         System.out.println(account
         );
     }

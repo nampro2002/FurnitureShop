@@ -392,9 +392,19 @@
                                     </div>
                                     <!-- Form Group (birthday)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="chooseGender">Gender</label></br>
-                                        <input type="radio" name = "gender" value="true" checked="true"> Male
-                                        <input type="radio" name = "gender" value="false" > Female
+                                        <label class="small mb-1" for="chooseGender">Gender</label></br>                                           
+                                        </br>
+                                        <c:choose>
+                                            <c:when test="${gender!=null}">
+                                                <input type="radio" name = "gender" value="true" checked > Male                                    
+                                                <input type="radio" name = "gender" value="false" > Female
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="radio" name = "gender" value="true" > Male                                       
+                                                <input type="radio" name = "gender" value="false" checked > Female
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </div>
                                 </div>        
                                 <!-- Form Row-->

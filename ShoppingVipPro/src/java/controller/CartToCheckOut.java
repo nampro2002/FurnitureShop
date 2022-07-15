@@ -46,7 +46,14 @@ public class CartToCheckOut extends HttpServlet {
             if (carts == null) {
                 carts = new LinkedHashMap<>();
             }
+            double totalMoney = 0;
+            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
+                Integer productId = entry.getKey();
+                Cart cart = entry.getValue();
+                totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
+            }
             request.setAttribute("carts", carts);
+            request.setAttribute("totalMoney", totalMoney);
             request.getRequestDispatcher("checkout.jsp").forward(request, response);
             
         }

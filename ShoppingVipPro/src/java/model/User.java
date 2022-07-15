@@ -36,7 +36,14 @@ public class User {
         this.address = address;
         this.accountID = accountID;
     }
-    
+
+    public User(String fristName, String lastName, String email, String phone, int accountID) {        
+        this.fristName = fristName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.accountID = accountID;
+    }
 
     public int getId() {
         return id;
@@ -72,6 +79,16 @@ public class User {
 
     public boolean isGender() {
         return gender;
+    }
+
+    public String getGender() {
+        Boolean a = true;
+        String trueOut = "true";
+        String falseOut = "false";
+        if (a.compareTo(gender) == 0) {
+            return trueOut;
+        }
+        return falseOut;
     }
 
     public void setGender(boolean gender) {
@@ -114,7 +131,5 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", fristName=" + fristName + ", lastName=" + lastName + ", birthday=" + birthday + ", gender=" + gender + ", email=" + email + ", phone=" + phone + ", address=" + address + ", accountID=" + accountID + '}';
     }
-
-    
 
 }

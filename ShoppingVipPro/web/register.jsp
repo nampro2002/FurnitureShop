@@ -62,7 +62,7 @@
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
                             <h3>Welcome new friend<br>Sign up now</h3>
-                            <h3>${mess}</h3>
+                            <p class ="text-danger">${mess}</p>
                             <form class="row contact_form" action="register" method="post" novalidate="novalidate">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="col-md-12 form-group p_star">

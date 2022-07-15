@@ -11,10 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Product;
 
 /**
@@ -33,24 +30,16 @@ public class HomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            ProductDAO s = new ProductDAO();
             ArrayList<Product> listprod1 = new ProductDAO().getProductWithNumber(0, 8);
             ArrayList<Product> listprod2 = new ProductDAO().getProductWithNumber(9, 8);
             ArrayList<Product> listprod3 = new ProductDAO().getProductWithNumber(20, 3);
-            ArrayList<Product> listprod4 = new ProductDAO().getProductWithNumber(41, 46);
-            ArrayList<Product> list = null;
-            list = s.getAll1("40");
-            request.setAttribute("data", list);
-            list = s.getAll1("41");
-            request.setAttribute("data1", list);
             request.setAttribute("listprod1", listprod1);
             request.setAttribute("listprod2", listprod2);
             request.setAttribute("listprod3", listprod3);
-            request.setAttribute("listprod4", listprod4);
             request.getSession().setAttribute("urlHistory", "home");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -68,11 +57,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -86,11 +71,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

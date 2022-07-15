@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Account;
 import model.User;
 
 /**
@@ -35,13 +36,16 @@ public class ProfileController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             UserDAO d = new UserDAO();
-            int accountId = Integer.parseInt(request.getParameter("accountId"));
-            User user = d.getUser(accountId);            
+            Account account = (Account) request.getSession().getAttribute("account");
+            int accountId = account.getId();
+            User user = d.getUser(accountId);
             String username = d.getUsername(accountId);
             request.setAttribute("user", user);
             request.setAttribute("accountId", accountId);
-            request.setAttribute("username", username);            
-            //          System.out.println(user.getFristName());
+            request.setAttribute("username", username);
+            if (user.getGender() == "true") {
+                request.setAttribute("gender", "true");
+            }
             request.getRequestDispatcher("profile.jsp").forward(request, response);
         }
     }
