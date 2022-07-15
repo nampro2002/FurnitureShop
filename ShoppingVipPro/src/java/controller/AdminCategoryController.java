@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import model.Account;
 import model.Category;
 
 /**
@@ -33,6 +34,11 @@ public class AdminCategoryController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            Account account = (Account) request.getSession().getAttribute("account");
+            if (account != null && account.getRole() != Account.ADMIN) {
+                response.sendRedirect("404page.jsp");
+                return;
+            }
             CategoryDAO cd = new CategoryDAO();
             ArrayList<Category> listCate =  cd.getAllCategories();
             request.setAttribute("listCate", listCate);

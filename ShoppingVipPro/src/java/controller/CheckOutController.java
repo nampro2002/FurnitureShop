@@ -62,22 +62,36 @@ public class CheckOutController extends HttpServlet {
             }
             String finalAddress = detailAddress + " " + address;
             String fullName = fName + " " + lName;
-            // luu vao order
-            Order order = new Order(accountId, totalMoney, note);
-            int orderId = new OrderDAO().createReturnId(order);
-            // luu vao shipping
-            ShippingDAO sd = new ShippingDAO();
-            Shipping shipping = new Shipping(fullName, phone, finalAddress, orderId);
-            int shippingId = sd.createReturnId(shipping);
+            if (request.getParameter("terms") != null) {
+                // luu vao order
+                Order order = new Order(accountId, totalMoney, note);
+                int orderId = new OrderDAO().createReturnId(order);
+                // luu vao shipping
+                ShippingDAO sd = new ShippingDAO();
+                Shipping shipping = new Shipping(fullName, phone, finalAddress, orderId);
+                int shippingId = sd.createReturnId(shipping);
 
-            //luu vao orderdetail
-            OrderDetailDAO ord = new OrderDetailDAO();
-            ord.saveCart(orderId, carts);
-            session.removeAttribute("carts");
-            CartDAO cd = new CartDAO();
-            cd.removeFromCart(accountId);
-            
-            request.getRequestDispatcher("thanks.jsp").forward(request, response);
+                //luu vao orderdetail
+                OrderDetailDAO ord = new OrderDetailDAO();
+                ord.saveCart(orderId, carts);
+                session.removeAttribute("carts");
+                CartDAO cd = new CartDAO();
+                cd.removeFromCart(accountId);
+                if (request.getParameter("selector") != null) {
+                    if (request.getParameter("selector").equals("pp")) {
+                        request.setAttribute("totalMoney", totalMoney);
+                        request.setAttribute("fullName", fullName);
+                        request.getRequestDispatcher("creditCard.jsp").forward(request, response);
+                        return;
+                    }
+                    request.getRequestDispatcher("thanks.jsp").forward(request, response);
+                    return;
+                } else {
+                    request.getRequestDispatcher("cart-to-checkout?accountId=" + accountId).forward(request, response);
+                }
+            }else{
+                request.getRequestDispatcher("cart-to-checkout?accountId=" + accountId).forward(request, response);
+            }
         }
     }
 

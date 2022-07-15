@@ -323,7 +323,7 @@
                                     </td>
                                     <td>${lst.getTotalPrice()}</td>
                                     <c:forEach items="${odInfo_Ship}" var="odhL">                                       
-                                        <c:if test="${odhL.getShippingId()==lst.getOrderId()}">
+                                        <c:if test="${odhL.getOrderId()==lst.getOrderId()}">
                                             <td>
                                                 <table border="1">
                                                     <thead>

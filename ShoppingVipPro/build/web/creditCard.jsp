@@ -160,8 +160,9 @@
                             </div>
                             <div class="col-sm-5 text-sm-center justify-content-center pt-4 pb-4">
                                 <small class="text-sm text-muted">Order Name</small>
-                                <h5 class="mb-5">${name}</h5>
+                                <h5 class="mb-5">${fullName}</h5>
                                 <small class="text-sm text-muted">Payment amount</small>
+                                <h5 class="mb-5">$${totalMoney}</h5>
                                 <div class="row px-3 justify-content-sm-center">
                                     <h2 class=""><span class="text-md font-weight-bold mr-2">$</span><span class="text-danger">$${total}</span></h2>
                                 </div>

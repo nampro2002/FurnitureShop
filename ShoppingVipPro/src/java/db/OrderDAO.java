@@ -242,12 +242,11 @@ public class OrderDAO extends DBContext {
     public ArrayList<OrderHistory_Shipping> getOrderShipping() {
         ArrayList<OrderHistory_Shipping> list = new ArrayList<>();
         try {
-            String sql = " select oh.id, s.name, s.phone,s.address, oh.createdDate from Shipping s inner join [Order] oh \n"
-                    + " on s.order_id = oh.id";
+            String sql = " select oh.id, s.name, s.phone,s.address, oh.createdDate, s.order_id from Shipping s inner join [Order] oh on s.order_id = oh.id";
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                OrderHistory_Shipping ohs = new OrderHistory_Shipping(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5));
+                OrderHistory_Shipping ohs = new OrderHistory_Shipping(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5),rs.getInt(6));
                 list.add(ohs);
             }
             return list;

@@ -67,19 +67,19 @@
                                 <h3>Billing Details</h3>
                                 <input type="hidden"  name="accountId" value="${sessionScope.account.getId()}"/>
                                 <div class="col-md-6 form-group p_star">
-                                    <input type="text" class="form-control" id="first" name="firstname" value="${user.getFristName()}" placeholder="First name"/>
+                                    <input type="text" class="form-control" id="first" name="firstname" value="${user.getFristName()}" placeholder="First name"required/>
                                 </div>
                                 <div class="col-md-6 form-group p_star">
-                                    <input type="text" class="form-control" id="last" name="lastname" value="${user.getLastName()}" placeholder="Last name"/>
+                                    <input type="text" class="form-control" id="last" name="lastname" value="${user.getLastName()}" placeholder="Last name"required/>
                                 </div>
                                 <div class="col-md-6 form-group p_star">
-                                    <input type="text" class="form-control" id="number" name="phone" value="${user.getPhone()}" placeholder="Phone number"/>
+                                    <input type="text" class="form-control" id="number" name="phone" value="${user.getPhone()}" placeholder="Phone number"required/>
                                 </div>
                                 <div class="col-md-6 form-group p_star">
-                                    <input type="text" class="form-control" id="email" name="email" value="${user.getEmail()}" placeholder="Email Address"/>
+                                    <input type="text" class="form-control" id="email" name="email" value="${user.getEmail()}" placeholder="Email Address" required/>
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="add1" name="address" value="${user.getAddress()}" placeholder="Address" />
+                                    <input type="text" class="form-control" id="add1" name="address" value="${user.getAddress()}" placeholder="Address" required/>
                                 </div>   
                                 <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" id="add1" name="detailaddress" placeholder="detail Address" required/>
@@ -156,7 +156,7 @@
                                         </p>
                                     </div>
                                     <div class="creat_account" style="font-size: 12px;">
-                                        <input type="checkbox" id="f-option4" name="selector" />
+                                        <input type="checkbox" id="f-option4" name="terms" />
                                         <label for="f-option4">I’ve read and accept the </label>
                                         <a ">terms & conditions*</a>
                                     </div>
