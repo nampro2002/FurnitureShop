@@ -266,32 +266,7 @@
                 margin-left: 20px;
                 margin-right: 20px;
             }
-        </style>
-        <script>
-            $(document).ready(function () {
-                // Activate tooltip
-                $('[data-toggle="tooltip"]').tooltip();
-
-                // Select/Deselect checkboxes
-                var checkbox = $('table tbody input[type="checkbox"]');
-                $("#selectAll").click(function () {
-                    if (this.checked) {
-                        checkbox.each(function () {
-                            this.checked = true;
-                        });
-                    } else {
-                        checkbox.each(function () {
-                            this.checked = false;
-                        });
-                    }
-                });
-                checkbox.click(function () {
-                    if (!this.checked) {
-                        $("#selectAll").prop("checked", false);
-                    }
-                });
-            });
-        </script>
+        </style>       
     </head>
     <body>
         <%@include file="components/navBarProfile.jsp" %>
@@ -308,46 +283,76 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover"border="1" >
                         <thead>
-                            <tr>
-                                <th>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="selectAll">
-                                        <label for="selectAll"></label>
-                                    </span>
-                                </th>
-                                <th>Order Id</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Total Price</th>
-                                <th>Order Date</th>
-                                <th>Action</th>
+                            <tr>                               
+                                <th>Id</th>
+                                <th>ProductInfo</th>                                                               
+                                <th>TotalPrice</th>                                                               
+                                <th>Shipping Info</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${orderInfoLst}" var ="lst">
-                                <tr>
-                                    <td>
-                                        <span class="custom-checkbox">
-                                            <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                            <label for="checkbox1"></label>
-                                        </span>
-                                    </td>                                
+                            <c:forEach items="${orderInfoLst}" var="lst">
+                                <tr>                                                                 
                                     <td>${lst.getOrderId()}</td>
-                                    <td>${lst.getName()}</td>
-                                    <td>${lst.getPhone()}</td>
-                                    <td>${lst.getEmail()}</td>
-                                    <td>${lst.getTotalPrice()}</td>
-                                    <td>${lst.getCreatedDate()}</td>
-
                                     <td>
-
+                                        <c:forEach items="${odInfo_Prod}" var ="odhP">
+                                            <c:if test="${lst.getOrderId()==odhP.getOrderId()}">
+                                                <table border="1">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product Image</th>
+                                                            <th>Product Name</th>
+                                                            <th>Product Price</th>
+                                                            <th>Order Quantity</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>${odhP.getName()}</td>
+                                                            <td><img src="${odhP.getImage()}" alt="alt" style="width: 200px;"/></td>
+                                                            <td>${odhP.getPrice()}</td>
+                                                            <td>${odhP.getQuantity()}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </c:if>
+                                        </c:forEach>
+                                    </td>
+                                    <td>${lst.getTotalPrice()}</td>
+                                    <c:forEach items="${odInfo_Ship}" var="odhL">                                       
+                                        <c:if test="${odhL.getShippingId()==lst.getOrderId()}">
+                                            <td>
+                                                <table border="1">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Phone</th>
+                                                            <th>Address</th>
+                                                            <th>Order Date</th>
+                                                            <th>Confirm Date</th>                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>${odhL.getName()}</td>
+                                                            <td>${odhL.getPhone()}</td>
+                                                            <td>${odhL.getAddress()}</td>
+                                                            <td>${odhL.getCreatedDate()}</td>
+                                                            <td>${odhL.getConfirmDate()}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </c:if>
+                                    </c:forEach>                                    
+                                    <td>                                       
                                         <a href="confirm-received?orderId=${lst.getOrderId()}" class="edit"><i class="material-icons" title="Check">&#10004;</i></a>
                                         <a href="order-delete?orderId=${lst.getOrderId()}" class="delete" ><i class="material-icons" title="Delete">&#xE872;</i></a>
                                     </td>
-                                </tr>   
+                                </tr>
                             </c:forEach>
                         </tbody>
                     </table>

@@ -4,25 +4,20 @@
  */
 package controller;
 
-import db.OrderDAO;
-import db.UserDAO;
+import db.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Account;
-import model.OrderHistory_Product;
-import model.OrderHistory_Shipping;
-import model.OrderInfo;
+import model.Category;
 
 /**
  *
  * @author Admin
  */
-public class UserOrderController extends HttpServlet {
+public class AdminEditInfoCategory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,18 +33,11 @@ public class UserOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            UserDAO ud = new UserDAO();
-            OrderDAO od = new OrderDAO();
-            Account account = (Account) request.getSession().getAttribute("account");
-            int accountId = account.getId();
-            ArrayList<OrderInfo> orderInfoLst = od.getInfoOrder(accountId);
-            ArrayList<OrderHistory_Product> odInfo_Prod = od.getOrderProduct();
-            ArrayList<OrderHistory_Shipping> odInfo_Ship = od.getOrderShipping();  
-//            ArrayList<Integer> orderedList = od.getCheckedOrderId(accountId);
-            request.setAttribute("orderInfoLst", orderInfoLst);
-            request.setAttribute("odInfo_Prod", odInfo_Prod);
-            request.setAttribute("odInfo_Ship", odInfo_Ship);
-            request.getRequestDispatcher("profileOrder.jsp").forward(request, response);
+            int cateId = Integer.parseInt(request.getParameter("cateId"));
+            CategoryDAO cd = new CategoryDAO();
+            Category category = cd.getCategoryById(cateId);
+           request.setAttribute("cate", category);
+           request.getRequestDispatcher("EditCategory.jsp").forward(request, response);
         }
     }
 

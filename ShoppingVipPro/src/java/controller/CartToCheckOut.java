@@ -41,21 +41,26 @@ public class CartToCheckOut extends HttpServlet {
             System.out.println(accountId);
             User user = new UserDAO().getUser(accountId);
             request.setAttribute("user", user);
-                        HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
             if (carts == null) {
                 carts = new LinkedHashMap<>();
             }
             double totalMoney = 0;
-            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-                Integer productId = entry.getKey();
-                Cart cart = entry.getValue();
-                totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
+            if (!carts.isEmpty()) {
+                for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
+                    Integer productId = entry.getKey();
+                    Cart cart = entry.getValue();
+                    totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
+                }
+                request.setAttribute("carts", carts);
+                request.setAttribute("totalMoney", totalMoney);
+                request.getRequestDispatcher("checkout.jsp").forward(request, response);
+                return;
             }
-            request.setAttribute("carts", carts);
-            request.setAttribute("totalMoney", totalMoney);
-            request.getRequestDispatcher("checkout.jsp").forward(request, response);
-            
+            else{
+                response.sendRedirect("cart");
+                }
         }
     }
 

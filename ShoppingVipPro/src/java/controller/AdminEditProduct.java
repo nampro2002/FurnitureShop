@@ -55,12 +55,12 @@ public class AdminEditProduct extends HttpServlet {
         String descprod = request.getParameter("descprod");
         int quantityprod = Integer.parseInt(request.getParameter("quantityprod"));
         int cateidprod = Integer.parseInt(request.getParameter("cateidprod"));
-        int page = Integer.parseInt(request.getParameter("page"));
+//        int page = Integer.parseInt(request.getParameter("page"));
         ProductDAO d = new ProductDAO();
         Product product = new Product(nameprod, imgsrc, priceprod, descprod, quantityprod, cateidprod);
         d.adminAddNewProduct(product);
         request.setAttribute("mess", "add succ");
-        request.getRequestDispatcher("admin-product?page="+page).forward(request, response);
+        request.getRequestDispatcher("admin-product").forward(request, response);
     }
 
     /**

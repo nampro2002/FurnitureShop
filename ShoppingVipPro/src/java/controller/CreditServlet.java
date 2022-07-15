@@ -4,25 +4,18 @@
  */
 package controller;
 
-import db.OrderDAO;
-import db.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Account;
-import model.OrderHistory_Product;
-import model.OrderHistory_Shipping;
-import model.OrderInfo;
 
 /**
  *
- * @author Admin
+ * @author Dell
  */
-public class UserOrderController extends HttpServlet {
+public class CreditServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,18 +31,14 @@ public class UserOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            UserDAO ud = new UserDAO();
-            OrderDAO od = new OrderDAO();
-            Account account = (Account) request.getSession().getAttribute("account");
-            int accountId = account.getId();
-            ArrayList<OrderInfo> orderInfoLst = od.getInfoOrder(accountId);
-            ArrayList<OrderHistory_Product> odInfo_Prod = od.getOrderProduct();
-            ArrayList<OrderHistory_Shipping> odInfo_Ship = od.getOrderShipping();  
-//            ArrayList<Integer> orderedList = od.getCheckedOrderId(accountId);
-            request.setAttribute("orderInfoLst", orderInfoLst);
-            request.setAttribute("odInfo_Prod", odInfo_Prod);
-            request.setAttribute("odInfo_Ship", odInfo_Ship);
-            request.getRequestDispatcher("profileOrder.jsp").forward(request, response);
+            String name = (String) request.getAttribute("name");
+            String total = (String) request.getAttribute("total");
+//            String name = (String) request.getSession().getAttribute("name");
+//            String total = (String) request.getSession().getAttribute("total");
+
+            request.setAttribute("name", name);
+            request.setAttribute("total", total);
+            request.getRequestDispatcher("CreditCheckOut.jsp").forward(request, response);
         }
     }
 

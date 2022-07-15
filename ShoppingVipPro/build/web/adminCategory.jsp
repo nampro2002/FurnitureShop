@@ -307,7 +307,7 @@
                                 <h2>User</h2>
                             </div>
                             <div class="col-sm-6">
-                                <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                                <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Category</span></a>
                                 <a href="#" class="btn btn-danger"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
                             </div>
                         </div>
@@ -328,8 +328,8 @@
                                     <td>${lc.getName()}</td>
                                     <td>${lc.getQuantity()}</td>                                    
                                     <td>
-                                        <a href="admin-edit-cate?cateId=${lc.getId()}&page=${page}" class="edit" ><i class="material-icons" title="Edit">&#xE254;</i></a>
-                                        <a href="admin-delete-cate?cateId=${lc.getId()}&page=${sessionScope.page}" class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a>
+                                        <a href="admin-edit-infocategory?cateId=${lc.getId()}" class="edit" ><i class="material-icons" title="Edit">&#xE254;</i></a>
+                                        <a href="admin-delete-category?cateId=${lc.getId()}" class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a>
                                     </td>
                                 </tr>                                
                                     </div>
@@ -353,37 +353,16 @@
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="admin-edit-product" method="get">
+                    <form action="admin-edit-category" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                        <div class="modal-body">					
-                            <div class="form-group">
-                                <label>Image</label>
-                                <input type="text" class="form-control" required name="imgsrc">
-                            </div>
+                        <div class="modal-body">					                           
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" required name="nameprod">
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="number" class="form-control" required name="priceprod">
-                            </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea class="form-control" required name="descprod"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input type="number" class="form-control" required name="quantityprod">
-                            </div>					
-                            <div class="form-group">
-                                <label>CategoryId</label>
-                                <input type="number" class="form-control" required name="cateidprod">
-                            </div>					
-                        </div>
+                                <input type="text" class="form-control" required name="name">
+                            </div>                            
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                             <input type="submit" class="btn btn-success" value="Add">

@@ -134,7 +134,7 @@
                                     <h4>Phuong thuc thanh toan</h4>
                                     <div class="payment_item">
                                         <div class="radion_btn">
-                                            <input type="radio" id="f-option5" name="selector" />
+                                            <input type="radio" id="f-option5" name="selector" value ="cod"/>
                                             <label for="f-option5">COD</label>
                                             <div class="check"></div>
                                         </div>
@@ -145,7 +145,7 @@
                                     </div>
                                     <div class="payment_item active">
                                         <div class="radion_btn">
-                                            <input type="radio" id="f-option6" name="selector" />
+                                            <input type="radio" id="f-option6" name="selector" value ="pp" />
                                             <label for="f-option6">Chuyen khoan</label>
                                             <img src="img/product/single-product/card.jpg" alt="" />
                                             <div class="check"></div>

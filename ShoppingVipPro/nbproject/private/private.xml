@@ -5,18 +5,19 @@
         <group>
             <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/db/OrderDAO.java</file>
             <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/profileOrderHistory.jsp</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/index.jsp</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/AdminEditProduct.java</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/model/OrderHistory_Product.java</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/adminProduct.jsp</file>
             <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/HomeController.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/adminCategory.jsp</file>
             <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/AdminCategoryController.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/model/Category.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/db/OrderDetailDAO.java</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/adminCategory.jsp</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/AdminEditCategory.java</file>
             <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/db/CategoryDAO.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/product.jsp</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/components/navBarProfile.jsp</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/CartController.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/ConfirmReceivedController.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/db/CartDAO.java</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/model/OrderInfo.java</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/ProfileOrderHistoryController.java</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/UserOrderController.java</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/AdminProductController.java</file>
+            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/db/ProductDAO.java</file>
         </group>
     </open-files>
 </project-private>

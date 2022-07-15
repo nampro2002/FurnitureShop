@@ -132,6 +132,18 @@
         <servlet-name>AdminCategoryController</servlet-name>
         <servlet-class>controller.AdminCategoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminEditCategory</servlet-name>
+        <servlet-class>controller.AdminEditCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDeleteCategory</servlet-name>
+        <servlet-class>controller.AdminDeleteCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminEditInfoCategory</servlet-name>
+        <servlet-class>controller.AdminEditInfoCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -271,6 +283,18 @@
     <servlet-mapping>
         <servlet-name>AdminCategoryController</servlet-name>
         <url-pattern>/admin-category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEditCategory</servlet-name>
+        <url-pattern>/admin-edit-category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDeleteCategory</servlet-name>
+        <url-pattern>/admin-delete-category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEditInfoCategory</servlet-name>
+        <url-pattern>/admin-edit-infocategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

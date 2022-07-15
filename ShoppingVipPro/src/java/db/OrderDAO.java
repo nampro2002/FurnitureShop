@@ -45,7 +45,7 @@ public class OrderDAO extends DBContext {
                 return rs.getInt(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
@@ -66,17 +66,9 @@ public class OrderDAO extends DBContext {
             }
             return list;
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        OrderDAO d = new OrderDAO();
-        ArrayList<OrderInfo> list = d.getInfoOrder(1);
-        for (OrderInfo orderInfo : list) {
-            System.out.println(orderInfo);
-        }
     }
 
     public void sendToOrderHistory(Order order, int shippingId) {
@@ -99,7 +91,7 @@ public class OrderDAO extends DBContext {
             st.setInt(6, order.getId());
             st.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -120,7 +112,7 @@ public class OrderDAO extends DBContext {
                 return order;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -133,7 +125,7 @@ public class OrderDAO extends DBContext {
             st.setInt(1, orderId);
             st.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -159,7 +151,7 @@ public class OrderDAO extends DBContext {
             }
             return list;
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -176,7 +168,7 @@ public class OrderDAO extends DBContext {
             }
             return list;
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -198,7 +190,7 @@ public class OrderDAO extends DBContext {
             }
             return list;
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -211,7 +203,7 @@ public class OrderDAO extends DBContext {
             st.setInt(1, ordHistoryId);
             st.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -229,7 +221,7 @@ public class OrderDAO extends DBContext {
             }
             return list;
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -243,9 +235,63 @@ public class OrderDAO extends DBContext {
             st.setInt(1, orderId);
             st.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    public ArrayList<OrderHistory_Shipping> getOrderShipping() {
+        ArrayList<OrderHistory_Shipping> list = new ArrayList<>();
+        try {
+            String sql = " select oh.id, s.name, s.phone,s.address, oh.createdDate from Shipping s inner join [Order] oh \n"
+                    + " on s.order_id = oh.id";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                OrderHistory_Shipping ohs = new OrderHistory_Shipping(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5));
+                list.add(ohs);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
+    public ArrayList<OrderHistory_Product> getOrderProduct() {
+        ArrayList<OrderHistory_Product> list = new ArrayList<>();
+        try {
+            String sql = "select od.order_id,\n"
+                    + "		p.name,\n"
+                    + "		p.image,\n"
+                    + "		p.price,		\n"
+                    + "		od.quantity\n"
+                    + "from OrderDetail od inner join product p on od.productId = p.id";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                OrderHistory_Product ohp = new OrderHistory_Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5));
+                list.add(ohp);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        OrderDAO od = new OrderDAO();
+        ArrayList<OrderInfo> odinfo = od.getInfoOrder(1);
+        ArrayList<OrderHistory_Product> odInfo_Prod = od.getOrderProduct();
+        ArrayList<OrderHistory_Shipping> odInfo_Ship = od.getOrderShipping();
+        for (OrderInfo of : odinfo) {
+            System.out.println(of);
+        }
+//        for (OrderHistory_Product op : odInfo_Prod) {
+//            System.out.println(op);
+//        }
+//        for (OrderHistory_Shipping os : odInfo_Ship) {
+//            System.out.println(os);
+//        }
+    }
 }

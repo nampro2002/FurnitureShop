@@ -76,6 +76,7 @@ public class CheckOutController extends HttpServlet {
             session.removeAttribute("carts");
             CartDAO cd = new CartDAO();
             cd.removeFromCart(accountId);
+            
             request.getRequestDispatcher("thanks.jsp").forward(request, response);
         }
     }

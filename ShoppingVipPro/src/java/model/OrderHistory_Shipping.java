@@ -29,6 +29,13 @@ public class OrderHistory_Shipping {
         this.createdDate = createdDate;
         this.confirmDate = confirmDate;
     }
+       public OrderHistory_Shipping(int shippingId, String name, String phone, String address, Date createdDate) {
+        this.shippingId = shippingId;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.createdDate = createdDate;
+    }
 
     public int getShippingId() {
         return shippingId;
