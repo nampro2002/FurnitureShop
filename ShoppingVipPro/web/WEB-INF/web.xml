@@ -132,6 +132,10 @@
         <servlet-name>AdminCategoryController</servlet-name>
         <servlet-class>controller.AdminCategoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreditServlet</servlet-name>
+        <servlet-class>controller.CreditServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -271,6 +275,10 @@
     <servlet-mapping>
         <servlet-name>AdminCategoryController</servlet-name>
         <url-pattern>/admin-category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreditServlet</servlet-name>
+        <url-pattern>/credit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

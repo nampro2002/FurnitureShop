@@ -8,6 +8,7 @@ import db.CartDAO;
 import db.OrderDAO;
 import db.OrderDetailDAO;
 import db.ShippingDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -76,7 +77,18 @@ public class CheckOutController extends HttpServlet {
             session.removeAttribute("carts");
             CartDAO cd = new CartDAO();
             cd.removeFromCart(accountId);
-            request.getRequestDispatcher("thanks.jsp").forward(request, response);
+            if (request.getParameter("selector").equals("credit")) {
+                String full = fName + " " + lName;
+//                request.getSession().setAttribute("name", full);
+//                request.getSession().setAttribute("total", totalMoney);
+                request.setAttribute("name", full);
+                request.setAttribute("total", totalMoney);
+//                RequestDispatcher rd = request.getRequestDispatcher("credit");
+//                rd.forward(request, response);
+                response.sendRedirect("credit");
+            } else {
+                request.getRequestDispatcher("thanks.jsp").forward(request, response);
+            }
         }
     }
 

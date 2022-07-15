@@ -131,7 +131,7 @@
                                     <div class="payment_item" style="margin:20px 0">
                                         <input type="text" placeholder="Enter coupon code" style="padding: 5px;"/>
                                     </div>
-                                    <h4>Phuong thuc thanh toan</h4>
+                                    <h4>Payment Method</h4>
                                     <div class="payment_item">
                                         <div class="radion_btn">
                                             <input type="radio" id="f-option5" name="selector" />
@@ -145,8 +145,8 @@
                                     </div>
                                     <div class="payment_item active">
                                         <div class="radion_btn">
-                                            <input type="radio" id="f-option6" name="selector" />
-                                            <label for="f-option6">Chuyen khoan</label>
+                                            <input type="radio" id="f-option6" name="selector" value="credit"/>
+                                            <label for="f-option6">Using Credit Card</label>
                                             <img src="img/product/single-product/card.jpg" alt="" />
                                             <div class="check"></div>
                                         </div>
@@ -156,7 +156,7 @@
                                         </p>
                                     </div>
                                     <div class="creat_account" style="font-size: 12px;">
-                                        <input type="checkbox" id="f-option4" name="selector" />
+                                        <input type="checkbox" id="f-option4" name="selector" required/>
                                         <label for="f-option4">I’ve read and accept the </label>
                                         <a ">terms & conditions*</a>
                                     </div>
