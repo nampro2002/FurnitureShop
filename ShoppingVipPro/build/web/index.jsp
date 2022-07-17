@@ -154,7 +154,7 @@
                                                 <div class="single_product_text">
                                                     <h4>${p.name}</h4>
                                                     <h3>$${p.price}</h3>
-                                                    <a href="add-to-cart?productId=${p.id}&accountId=${sessionScope.account.getId()}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                                    <a href="add-to-cart?productId=${p.id}&accountId=${sessionScope.account.getId()}&quantity=${p.quantity}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@
                                                 <div class="single_product_text">
                                                     <h4>${p.name}</h4>
                                                     <h3>$${p.price}</h3>
-                                                    <a href="add-to-cart?productId=${p.id}&accountId=${sessionScope.account.getId()}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                                    <a href="add-to-cart?productId=${p.id}&accountId=${sessionScope.account.getId()}&quantity=${p.quantity}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                                 </div>
                                             </div>
                                         </div>

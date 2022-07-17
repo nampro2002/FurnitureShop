@@ -22,72 +22,6 @@ import model.Product;
  */
 public class ProductDAO extends DBContext {
 
-//    public ArrayList<Product> getAll() throws SQLException {
-//        ArrayList<Product> list = new ArrayList<>();
-//        String sql = "select * from Product";
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                list.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getString("image"),
-//                        rs.getDouble("price")));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return list;
-//    }
-//
-//    public ArrayList<Product> getAll1(String id) throws SQLException {
-//        ArrayList<Product> list = new ArrayList<>();
-//        String sql = "select * from Product where id=?";
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            st.setString(1, id);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                list.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getString("image"),
-//                        rs.getDouble("price")));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return list;
-//    }
-//
-//    public ArrayList<Product> getAllTop3() throws SQLException {
-//        ArrayList<Product> list = new ArrayList<>();
-//        String sql = "select top 3* from Product";
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                list.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getString("image"),
-//                        rs.getDouble("price")));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return list;
-//    }
-    //update
-//    public Product getProductById(String id) {
-//        String sql = "select * from Product where id=?";
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            st.setString(1, id);
-//            ResultSet rs = st.executeQuery();
-//            if (rs.next()) {
-//                return new Product(rs.getInt(1),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getDouble(4));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return null;
-//    }
     public void delete(String id) {
         String sql = "delete from Product where id = ?";
         try {
@@ -111,6 +45,17 @@ public class ProductDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public int getProductQuantity(int id) throws SQLException {
+        String sql = "select quantity from Product where id = ?";
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        return 0;
     }
 
     public boolean existedProduct(String id) {
@@ -271,10 +216,9 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) throws SQLException {
         ProductDAO d = new ProductDAO();
-        ArrayList<Product> list = d.getProductWithPaggingSortBy(1, 8, 3);
-        for (Product product : list) {
-            System.out.println(product);
-        }
+        int num = 0;
+        num = d.getProductQuantity(12);
+        System.out.println(num);
     }
 
     public ArrayList<Product> getProductsByCategoryId(int categoryId) {

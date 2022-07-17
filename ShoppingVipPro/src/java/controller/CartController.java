@@ -4,6 +4,7 @@
  */
 package controller;
 
+import db.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -36,16 +37,21 @@ public class CartController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
+            ProductDAO pd = new ProductDAO();
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
             if (carts == null) {
                 carts = new LinkedHashMap<>();
             }
+            String str = "";
             double totalMoney = 0;
             for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
                 Integer productId = entry.getKey();
                 Cart cart = entry.getValue();
+                int quantity = cart.getProduct().getQuantity();
+                str += cart.getProduct().getId() + " " + cart.getQuantity() + "&&";
                 totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
             }
+            request.getSession().setAttribute("quan", str);
             request.setAttribute("carts", carts);
             request.setAttribute("totalMoney", totalMoney);
             request.getSession().setAttribute("urlHistory", "cart");

@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/AdminEditProduct.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/CartToCheckOut.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/CheckOutController.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/carts.jsp</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/adminProduct.jsp</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/checkout.jsp</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/HomeController.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/AdminEditInfoCategory.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/adminCategory.jsp</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/creditCard.jsp</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/controller/AdminEditCategory.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/src/java/db/CategoryDAO.java</file>
-            <file>file:/C:/Users/Admin/Downloads/ShoppingOnlineVipPro/ShoppingOnlineVipPro/ShoppingVipPro/web/EditCategory.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

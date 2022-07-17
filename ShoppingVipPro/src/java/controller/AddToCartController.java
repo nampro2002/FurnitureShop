@@ -44,10 +44,12 @@ public class AddToCartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             CartDAO cd = new CartDAO();
+            ProductDAO pd = new ProductDAO();
             /* TODO output your page here. You may use following sample code. */
-            Account account  = (Account) request.getSession().getAttribute("account");
+            Account account = (Account) request.getSession().getAttribute("account");
             int accountId = account.getId();
             int productId = Integer.parseInt(request.getParameter("productId"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
             HttpSession session = request.getSession();
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
             if (carts == null) {
@@ -57,9 +59,11 @@ public class AddToCartController extends HttpServlet {
             if (carts.containsKey(productId)) {
                 System.out.println("co contain key");
                 int oldQuantity = carts.get(productId).getQuantity();
-                carts.get(productId).setQuantity(oldQuantity + 1);
+                if (oldQuantity < pd.getProductQuantity(productId)) {
+                    carts.get(productId).setQuantity(oldQuantity + 1);
+                }
                 cd.updateCart(accountId, productId, carts.get(productId).getQuantity());
-                 System.out.println("update cart");
+                System.out.println("update cart");
             } else {
                 System.out.println("khong contain");
                 Product product = new ProductDAO().getProductById(productId);
@@ -69,7 +73,7 @@ public class AddToCartController extends HttpServlet {
                 System.out.println("add to cart");
             }
 //            ArrayList<CartEntity> list = cd.getCartById(accountId);
-            
+
             session.setAttribute("carts", carts);
             response.sendRedirect((String) session.getAttribute("urlHistory"));
         }
