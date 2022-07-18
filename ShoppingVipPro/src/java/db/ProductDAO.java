@@ -98,7 +98,7 @@ public class ProductDAO extends DBContext {
     public ArrayList<Product> getProductWithNumber(int start, int end) {
         ArrayList<Product> list = new ArrayList<>();
         try {
-            String sql = "select * from Product order by id\n"
+            String sql = "select * from Product where status = 1 order by id\n"
                     + "offset ? row fetch next ? rows only";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, start);
@@ -124,7 +124,7 @@ public class ProductDAO extends DBContext {
     public ArrayList<Product> getProductWithPagging(int page, int PAGE_SIZE) {
         ArrayList<Product> list = new ArrayList<>();
         try {
-            String sql = "select * from Product order by id\n"
+            String sql = "select * from Product where status = 1 order by id\n"
                     + "offset (?-1)*? row fetch next ? rows only";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, page);
@@ -149,11 +149,11 @@ public class ProductDAO extends DBContext {
 
     public ArrayList<Product> getProductWithPaggingSortBy(int page, int PAGE_SIZE, int selectId) {
         ArrayList<Product> list = new ArrayList<>();
-        String sql = "select * from Product order by id offset (?-1)*? row fetch next ? rows only";
+        String sql = "select * from Product where status = 1 order by id offset (?-1)*? row fetch next ? rows only";
         if (selectId == 1) {
-            sql = "select * from Product order by name offset (?-1)*? row fetch next ? rows only";
+            sql = "select * from Product where status = 1 order by name offset (?-1)*? row fetch next ? rows only";
         } else if (selectId == 2) {
-            sql = "select * from Product order by price offset (?-1)*? row fetch next ? rows only";
+            sql = "select * from Product where status = 1 order by price offset (?-1)*? row fetch next ? rows only";
         }
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -180,7 +180,7 @@ public class ProductDAO extends DBContext {
     public int getTotalProduct() {
         ArrayList<Product> list = new ArrayList<>();
         try {
-            String sql = "select count(id) from Product ";
+            String sql = "select count(id) from Product where status = 1";
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -194,7 +194,7 @@ public class ProductDAO extends DBContext {
 
     public ArrayList<Product> getAll() {
         ArrayList<Product> list = new ArrayList<>();
-        String sql = "select * from Product";
+        String sql = "select * from Product where status = 1";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -223,7 +223,7 @@ public class ProductDAO extends DBContext {
 
     public ArrayList<Product> getProductsByCategoryId(int categoryId) {
         ArrayList<Product> list = new ArrayList<>();
-        String sql = "select * from product where cateID = ?";
+        String sql = "select * from product where cateID = ? and status = 1";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, categoryId);
@@ -245,7 +245,7 @@ public class ProductDAO extends DBContext {
     }
 
     public Product getProductById(int productId) {
-        String sql = "select * from product where id = ?";
+        String sql = "select * from product where id = ? and status = 1";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, productId);
@@ -292,8 +292,9 @@ public class ProductDAO extends DBContext {
     }
 
     public void adminDeleteProduct(int productId) {
-        String sql = "DELETE FROM [dbo].[product]\n"
-                + "      WHERE [product].id = ?";
+        String sql = "UPDATE [dbo].[product]\n"
+                + "   SET [status] = 0\n"
+                + " WHERE id =?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, productId);

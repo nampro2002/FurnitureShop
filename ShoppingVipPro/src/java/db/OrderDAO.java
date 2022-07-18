@@ -58,7 +58,7 @@ public class OrderDAO extends DBContext {
                     + "where u.AccountId = ? and status = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, accountId);
-            st.setString(2, status);
+            st.setString(2, "false");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 OrderInfo orderInfo = new OrderInfo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getString(7));
@@ -246,7 +246,7 @@ public class OrderDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                OrderHistory_Shipping ohs = new OrderHistory_Shipping(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5),rs.getInt(6));
+                OrderHistory_Shipping ohs = new OrderHistory_Shipping(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6));
                 list.add(ohs);
             }
             return list;
@@ -280,17 +280,22 @@ public class OrderDAO extends DBContext {
 
     public static void main(String[] args) {
         OrderDAO od = new OrderDAO();
-        ArrayList<OrderInfo> odinfo = od.getInfoOrder(1);
-        ArrayList<OrderHistory_Product> odInfo_Prod = od.getOrderProduct();
-        ArrayList<OrderHistory_Shipping> odInfo_Ship = od.getOrderShipping();
-        for (OrderInfo of : odinfo) {
-            System.out.println(of);
-        }
+//        ArrayList<OrderHistory> odinfo = od.getOrderHistory(1);
+//        ArrayList<OrderHistory_Product> odInfo_Prod = od.getOrderHistoryProduct();
+//        ArrayList<OrderHistory_Shipping> odInfo_Ship = od.getOrderHistoryShipping();
+//        for (OrderHistory of : odinfo) {
+//            System.out.println("a");
+//            System.out.println(of);
+//        }
 //        for (OrderHistory_Product op : odInfo_Prod) {
+//             System.out.println("b");
 //            System.out.println(op);
 //        }
 //        for (OrderHistory_Shipping os : odInfo_Ship) {
+//             System.out.println("c");
 //            System.out.println(os);
 //        }
+        Order order = od.getOrderbyId(24);
+        System.out.println(order);
     }
 }

@@ -62,8 +62,10 @@ public class CategoryDAO extends DBContext {
     }
 
     public void deleteCategory(int cateId) {
-        String sql = "DELETE FROM [dbo].[Category]\n"
-                + "      WHERE cid = ?";
+        String sql = "UPDATE [dbo].[product]\n"
+                + "   SET \n"
+                + "      [status] = 0\n"
+                + " WHERE cateID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cateId);
